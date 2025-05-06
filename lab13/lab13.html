@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список дел</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            max-width: 600px;
+        }
+        input[type="text"] {
+            width: calc(100% - 110px);
+            padding: 10px;
+            margin-right: 10px;
+        }
+        button {
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .task {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 5px 0;
+        }
+        .task .edit-btn, .task .delete-btn {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Список дел</h1>
+    <input type="text" id="taskInput" placeholder="Введите название задачи">
+    <button id="addTaskBtn">Добавить</button>
+
+    <div>
+        <button id="showAllBtn">Показать все</button>
+        <button id="showCompletedBtn">Показать выполненные</button>
+        <button id="showPendingBtn">Показать не выполненные</button>
+    </div>
+
+    <div id="taskList"></div>
+
+    <script>
+        class Task {
+            static lastId = 0;
+
+            constructor(title) {
+                this.id = ++Task.lastId;
+                this.title = title;
+                this.completed = false;
+            }
+
+            updateTitle(newTitle) {
+                this.title = newTitle;
+            }
+
+            toggleCompleted() {
+                this.completed = !this.completed;
+            }
+        }
+
+        class Todolist {
+            static lastId = 0;
+
+            constructor(name) {
+                this.id = ++Todolist.lastId;
+                this.name = name;
+                this.tasks = [];
+            }
+
+            addTask(task) {
+                this.tasks.push(task);
+            }
+
+            filterTasks(completed) {
+                return this.tasks.filter(task => task.completed == completed);
+            }
+
+            updateName(newName) {
+                this.name = newName;
+            }
+        }
+
+        const todolist = new Todolist('Мой список дел');
+
+        const taskInput = document.getElementById('taskInput');
+        const addTaskBtn = document.getElementById('addTaskBtn');
+        const taskList = document.getElementById('taskList');
+
+        addTaskBtn.addEventListener('click', () => {
+            const taskTitle = taskInput.value.trim();
+            if (taskTitle) {
+                const task = new Task(taskTitle);
+                todolist.addTask(task);
+                renderTasks();
+                taskInput.value = '';
+            }
+        });
+
+        const renderTasks = (filter = 'all') => {
+            taskList.innerHTML = '';
+            let tasksToDisplay = todolist.tasks;
+
+            if (filter == 'completed') {
+                tasksToDisplay = todolist.filterTasks(true);
+            } else if (filter == 'pending') {
+                tasksToDisplay = todolist.filterTasks(false);
+            }
+
+            tasksToDisplay.forEach(task => {
+                const taskDiv = document.createElement('div');
+                taskDiv.classList.add('task');
+                taskDiv.innerHTML = `
+                    <input type="checkbox" ${task.completed ? 'checked' : ''} 
+                           onchange="toggleTaskCompleted(${task.id})">
+                    <span>${task.title}</span>
+                    <button class="edit-btn" onclick="editTask(${task.id})">Редактировать</button>
+                    <button class="delete-btn" onclick="deleteTask(${task.id})">Удалить</button>
+                `;
+                taskList.appendChild(taskDiv);
+            });
+        };
+
+        const toggleTaskCompleted = (id) => {
+            const task = todolist.tasks.find(t => t.id == id);
+            if (task) {
+                task.toggleCompleted();
+                renderTasks();
+            }
+        };
+
+        const deleteTask = (id) => {
+            todolist.tasks = todolist.tasks.filter(t => t.id !== id);
+            renderTasks();
+        };
+
+        const editTask = (id) => {
+            const task = todolist.tasks.find(t => t.id == id);
+            if (task) {
+                const newTitle = prompt('Введите новое название задачи:', task.title);
+                if (newTitle) {
+                    task.updateTitle(newTitle);
+                    renderTasks();
+                }
+            }
+        };
+
+        document.getElementById('showAllBtn').addEventListener('click', () => renderTasks('all'));
+        document.getElementById('showCompletedBtn').addEventListener('click', () => renderTasks('completed'));
+        document.getElementById('showPendingBtn').addEventListener('click', () => renderTasks('pending'));
+    </script>
+</body>
+</html>
