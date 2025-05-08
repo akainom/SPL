@@ -1,27 +1,26 @@
-name: Deploy React Calculator to GitHub Pages
+name: Deploy React Calculator
 
 on:
   push:
-    branches: ["main"]
+    branches: [main]
     paths:
-      - 'lab06_2/calculator'  
-  workflow_dispatch:
+      - 'lab06_2/calculator/**'  
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
 
-      - name: Install dependencies
+      - name: Install and build
         run: |
-          cd calculator  # Переход в папку с калькулятором
+          cd lab06_2/calculator  # Правильный путь к вашему проекту
           npm install
           npm run build
 
@@ -29,5 +28,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: .lab06_2/calculator/build 
-          
+          publish_dir: lab06_2/calculator/build  
