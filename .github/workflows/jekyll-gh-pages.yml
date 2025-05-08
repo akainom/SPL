@@ -20,7 +20,7 @@ jobs:
 
       - name: Install and build
         run: |
-          cd lab06_2/calculator  # Правильный путь к вашему проекту
+          cd lab06_2/calculator  
           npm install
           npm run build
 
