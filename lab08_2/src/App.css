@@ -1,0 +1,84 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #1a1a1a;
+  padding: 2rem;
+}
+
+.counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  background: #2d2d2d;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  min-width: 320px;
+  max-width: 90%;
+  transition: transform 0.3s ease;
+}
+
+.counter:hover {
+  transform: translateY(-4px);
+}
+
+.number {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #00ff88;
+  text-shadow: 0 0 12px rgba(0, 255, 136, 0.4);
+  margin: 1rem 0;
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+button {
+  padding: 0.8rem 1.6rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+button:nth-child(1) {
+  background: #00ff88;
+  color: #1a1a1a;
+}
+
+button:nth-child(1):hover {
+  background: #00cc6a;
+  box-shadow: 0 4px 16px rgba(0, 255, 136, 0.3);
+}
+
+button:nth-child(2) {
+  background: #ff4757;
+  color: white;
+}
+
+button:nth-child(2):hover {
+  background: #ff2d3e;
+  box-shadow: 0 4px 16px rgba(255, 71, 87, 0.3);
+}
+
+button:nth-child(3) {
+  background: #576574;
+  color: white;
+}
+
+button:nth-child(3):hover {
+  background: #404b5a;
+  box-shadow: 0 4px 16px rgba(87, 101, 116, 0.3);
+}
