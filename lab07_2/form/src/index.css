@@ -147,7 +147,7 @@ input.error-border {
   text-align: center;
 }
 
-.form-footer-links {
+.form-footer-actions {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;

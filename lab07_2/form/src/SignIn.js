@@ -1,4 +1,3 @@
-// SignIn.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -15,20 +14,17 @@ const SignIn = () => {
     const newErrors = {};
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    // Email validation
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
     } else if (!emailRegex.test(formData.email)) {
       newErrors.email = 'Invalid email format';
     }
-
-    // Password validation
     if (!formData.password) {
       newErrors.password = 'Password is required';
     }
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    return Object.keys(newErrors).length == 0;
   };
 
   const handleSubmit = (e) => {
@@ -36,14 +32,12 @@ const SignIn = () => {
     if (validate()) {
       const users = JSON.parse(localStorage.getItem('users')) || [];
       const user = users.find(u => 
-        u.email === formData.email && 
-        u.password === formData.password
+        u.email === formData.email && u.password === formData.password
       );
   
       if (user) {
         setSuccess(true);
         setTimeout(() => setSuccess(false), 3000);
-        // Clear form on success
         setFormData({ email: '', password: '' });
       } else {
         setErrors({ general: 'Invalid email or password' });
@@ -55,7 +49,6 @@ const SignIn = () => {
     <div className="form-container">
       <h2>Sign In</h2>
       <form onSubmit={handleSubmit}>
-        {/* Email Field */}
         <div className="form-group">
           <label>Email:</label>
           <input
@@ -67,7 +60,6 @@ const SignIn = () => {
           {errors.email && <span className="error">{errors.email}</span>}
         </div>
 
-        {/* Password Field */}
         <div className="form-group">
           <label>Password:</label>
           <div className="password-input-container">
@@ -94,7 +86,7 @@ const SignIn = () => {
         
         {success && <div className="success-message">Login successful!</div>}
 
-        <div className="form-footer-links">
+        <div className="form-footer-actions">
           <Link to="/sign-up" className="link">Create new account</Link>
           <Link to="/reset-password" className="link">Forgot password?</Link>
         </div>

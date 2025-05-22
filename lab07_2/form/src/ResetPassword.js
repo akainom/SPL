@@ -1,4 +1,3 @@
-// ResetPassword.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -17,17 +16,40 @@ const ResetPassword = () => {
       setError('Invalid email format');
       return false;
     }
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    if (!users.find(u => u.email == email)) {
+      setError('Email not exists');
+      return false;
+    }
     return true;
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validate()) {
-      const newPassword = Math.random().toString(36).slice(-8);
-      setSuccess(`New password: ${newPassword}`);
-      setTimeout(() => setSuccess(''), 5000);
-    }
+  e.preventDefault();
+  if (!validate()) return;
+
+  const newPassword = Math.random().toString(36).slice(-8); // Генерация пароля
+  const users = JSON.parse(localStorage.getItem('users')) || []; // Получаем всех пользователей
+
+  const userIndex = users.findIndex(u => u.email === email);
+
+  if (userIndex === -1) {
+    setError('Пользователь с таким email не найден');
+    setTimeout(() => setError(''), 5000);
+    return;
+  }
+
+  const updatedUsers = [...users];
+  updatedUsers[userIndex] = {
+    ...updatedUsers[userIndex],
+    password: newPassword
   };
+
+  localStorage.setItem('users', JSON.stringify(updatedUsers));
+
+  setSuccess(`Новый пароль: ${newPassword}`);
+  setTimeout(() => setSuccess(''), 5000);
+};
 
   return (
     <div className="form-container">

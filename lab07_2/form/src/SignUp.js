@@ -1,4 +1,3 @@
-// SignUp.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -20,19 +19,15 @@ const SignUp = () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
 
-    // Name validation
     if (!formData.name.trim()) newErrors.name = 'Name is required';
     else if (!nameRegex.test(formData.name)) newErrors.name = 'Invalid name format';
 
-    // Email validation
     if (!formData.email.trim()) newErrors.email = 'Email is required';
     else if (!emailRegex.test(formData.email)) newErrors.email = 'Invalid email format';
 
-    // Password validation
     if (!formData.password) newErrors.password = 'Password is required';
     else if (!passwordRegex.test(formData.password)) newErrors.password = 'Password must contain at least 8 characters, one uppercase, one lowercase and one number';
 
-    // Confirm Password validation
     if (!formData.confirmPassword) newErrors.confirmPassword = 'Confirm password is required';
     else if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = 'Passwords do not match';
 
@@ -43,7 +38,6 @@ const SignUp = () => {
   const handleSubmit = (e) => {
   e.preventDefault();
   if (validate()) {
-    // Исправленный код:
     let users;
     try {
       users = JSON.parse(localStorage.getItem('users')) || [];
@@ -52,13 +46,11 @@ const SignUp = () => {
       users = [];
     }
 
-    // Проверка уникальности email
     if (users.some(user => user.email === formData.email)) {
       setErrors({ email: 'Email already exists' });
       return;
     }
 
-    // Добавление нового пользователя
     users.push(formData);
     
     try {
@@ -84,7 +76,6 @@ const SignUp = () => {
     <div className="form-container">
       <h2>Sign Up</h2>
       <form onSubmit={handleSubmit}>
-        {/* Name Field */}
         <div className="form-group">
           <label>Name:</label>
           <input
@@ -96,7 +87,6 @@ const SignUp = () => {
           {errors.name && <span className="error">{errors.name}</span>}
         </div>
 
-        {/* Email Field */}
         <div className="form-group">
           <label>Email:</label>
           <input
@@ -108,7 +98,6 @@ const SignUp = () => {
           {errors.email && <span className="error">{errors.email}</span>}
         </div>
 
-        {/* Password Field */}
         <div className="form-group">
           <label>Password:</label>
           <div className="password-input-container">
@@ -129,7 +118,6 @@ const SignUp = () => {
           {errors.password && <span className="error">{errors.password}</span>}
         </div>
 
-        {/* Confirm Password Field */}
         <div className="form-group">
           <label>Confirm Password:</label>
           <div className="password-input-container">
