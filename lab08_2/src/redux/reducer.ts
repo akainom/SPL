@@ -1,5 +1,3 @@
-
-
 interface Istate{
     count:number;
 }

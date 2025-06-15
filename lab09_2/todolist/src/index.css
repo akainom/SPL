@@ -1,0 +1,117 @@
+.taskContainer {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #fff5f7;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  text-align: center;
+  color: #db2777;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+}
+
+.inputContainer {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.taskInput {
+  flex: 1;
+  padding: 0.75rem;
+  border: 2px solid #fbcfe8;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.taskInput:focus {
+  border-color: #db2777;
+}
+
+.addButton, .saveButton {
+  padding: 0.75rem 1.5rem;
+  background-color: #db2777;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.addButton:hover, .saveButton:hover {
+  background-color: #be185d;
+}
+
+.taskList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.taskItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.taskContent {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.checkbox {
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+}
+
+.taskText {
+  font-size: 1.1rem;
+  color: #4b5563;
+}
+
+.completed .taskText {
+  text-decoration: line-through;
+  color: #9ca3af;
+}
+
+.taskActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.editButton, .deleteButton {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: opacity 0.3s;
+}
+
+.editButton {
+  background-color: #60a5fa;
+  color: white;
+}
+
+.deleteButton {
+  background-color: #f87171;
+  color: white;
+}
+
+.editButton:hover, .deleteButton:hover {
+  opacity: 0.8;
+}

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./App.css";
 import { Calculator } from "./components/Calculator";
 
 export const App = () => {

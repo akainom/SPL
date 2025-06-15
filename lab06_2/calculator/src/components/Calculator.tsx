@@ -17,9 +17,11 @@ export const Calculator = () => {
   const [history, setHistory] = useState<string[]>([]);
 
   const handleKeyDown = (e: KeyboardEvent) => {
+    console.log(`Keyboard event: ${e.key}`)
+    if (e.key === "c") clearDisplay();
     if (e.key === "=") calculate();
     else if (e.key === "Backspace") deleteLastChar();
-    else if (buttons.includes(e.key)) updateDisplay(e.key);
+    else if (buttons.filter(c => c !== "C").includes(e.key)) updateDisplay(e.key);
   };
 
   useEffect(() => {
@@ -28,11 +30,13 @@ export const Calculator = () => {
   }, [display, history]);
 
   const calculate = () => {
-    if (!display) return;
-
+    if (display == null) return;
+    
     const result = safeEvaluation(display);
-    if (result === undefined) return;
+    if (result === undefined || result === null) return;
 
+
+    
     if (result === Infinity) {
       alert("Деление на ноль!");
       setHistory([...history, `${display} = Error`]);

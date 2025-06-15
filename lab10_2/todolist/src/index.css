@@ -1,0 +1,161 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Общий контейнер приложения */
+.taskContainer {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Заголовок */
+.header {
+  text-align: center;
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Контейнер для input и кнопки */
+.inputContainer {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+/* Поле ввода задачи */
+.taskInput {
+  flex-grow: 1;
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  transition: border-color 0.3s;
+}
+
+.taskInput:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* Кнопки добавления и сохранения */
+.addButton, .saveButton {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.addButton:hover, .saveButton:hover {
+  background-color: #0056b3;
+}
+
+/* Список задач */
+.taskList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Один элемент списка */
+.taskItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: background-color 0.2s;
+}
+
+.taskItem:hover {
+  background-color: #f1f1f1;
+}
+
+/* Контейнер с чекбоксом и текстом */
+.taskContent {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-grow: 1;
+}
+
+/* Стили для чекбокса */
+.checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+}
+
+/* Текст задачи */
+.taskText {
+  font-size: 1rem;
+  color: #333;
+  user-select: none;
+  word-break: break-word;
+  flex-grow: 1;
+}
+
+/* Зачёркивание и изменение цвета для выполненных задач */
+.taskItem.completed .taskText {
+  text-decoration: line-through;
+  color: #999;
+  font-style: italic;
+}
+
+/* Контейнер кнопок редактирования и удаления */
+.taskActions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Кнопки редактирования и удаления */
+.editButton, .deleteButton {
+  padding: 6px 12px;
+  font-size: 0.875rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Кнопка редактирования */
+.editButton {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.editButton:hover {
+  background-color: #e0a800;
+}
+
+/* Кнопка удаления */
+.deleteButton {
+  background-color: #dc3545;
+  color: white;
+}
+
+.deleteButton:hover {
+  background-color: #b02a37;
+}
